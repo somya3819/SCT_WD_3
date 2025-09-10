@@ -1,105 +1,155 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #2f3e46;
+    background: linear-gradient(135deg, #2f3e46 0%, #354f52 100%);
     color: #cad2c5;
 }
 
  .game-container {
-     background-color: #354f52;
-     padding: 40px;
-     border-radius: 10px;
-     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+     background: linear-gradient(135deg, #354f52 60%, #52796f 100%);
+     padding: 40px 30px 30px 30px;
+     border-radius: 20px;
+     box-shadow: 0 8px 32px 0 rgba(44, 62, 80, 0.25), 0 1.5px 6px 0 #2f3e46;
      text-align: center;
      width: 90%;
-     max-width: 450px;
+     max-width: 480px;
+     border: 2px solid #84a98c;
+     position: relative;
 }
 
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
+ h1 {
+     font-size: 2.7em;
+     margin-bottom: 25px;
+     letter-spacing: 2px;
+     color: #cad2c5;
+     text-shadow: 0 2px 8px #2f3e46cc;
 }
 
-.game-mode {
-    margin-bottom: 20px;
+ .game-mode {
+     margin-bottom: 25px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 10px;
 }
 
  .game-mode button {
-     padding: 10px 20px;
-     margin: 0 5px;
+     padding: 10px 24px;
      border: none;
-     background-color: #52796f;
+     background: linear-gradient(135deg, #52796f 60%, #84a98c 100%);
      color: #cad2c5;
-     border-radius: 5px;
+     border-radius: 8px;
      cursor: pointer;
-     transition: background-color 0.3s;
-}
+     font-size: 1em;
+     font-weight: 600;
+     box-shadow: 0 2px 8px #2f3e4633;
+     transition: background 0.3s, transform 0.2s;
+     outline: none;
+ }
 
  .game-mode button:hover {
-     background-color: #84a98c;
+     background: linear-gradient(135deg, #84a98c 60%, #52796f 100%);
+     transform: translateY(-2px) scale(1.05);
 }
 
  .game-mode button.active {
-     background-color: #84a98c;
+     background: linear-gradient(135deg, #84a98c 60%, #52796f 100%);
      font-weight: bold;
+     color: #2f3e46;
+     border: 2px solid #cad2c5;
+}
+.game-mode select {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 2px solid #52796f;
+    background: #cad2c5;
+    color: #2f3e46;
+    font-size: 1em;
+    font-weight: 600;
+    margin-left: 10px;
+    box-shadow: 0 1px 4px #2f3e4633;
+    transition: border 0.3s;
+    outline: none;
+}
+.game-mode select:focus {
+    border: 2px solid #84a98c;
 }
 
-.status-message {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    height: 20px;
+ .status-message {
+     font-size: 1.25em;
+     margin-bottom: 22px;
+     height: 24px;
+     color: #84a98c;
+     font-weight: 600;
+     letter-spacing: 1px;
+     text-shadow: 0 1px 4px #2f3e4680;
 }
 
-.game-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
+ .game-board {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: 14px;
+     width: 320px;
+     height: 320px;
+     margin: 0 auto 18px auto;
+     background: #2f3e46;
+     border-radius: 16px;
+     box-shadow: 0 2px 12px #2f3e4633;
 }
 
  .cell {
      width: 100px;
      height: 100px;
-     background-color: #52796f;
+     background: linear-gradient(135deg, #52796f 60%, #354f52 100%);
      display: flex;
      justify-content: center;
      align-items: center;
-     font-size: 3em;
+     font-size: 2.em;
      font-weight: bold;
      cursor: pointer;
-     transition: background-color 0.3s;
+     border-radius: 12px;
+     box-shadow: 0 2px 8px #2f3e4633;
+     border: 2px solid #cad2c5;
+     transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
  .cell:hover {
-     background-color: #84a98c;
+     background: linear-gradient(135deg, #84a98c 60%, #52796f 100%);
+     transform: scale(1.08);
+     box-shadow: 0 4px 16px #84a98c55;
 }
 
  .cell.x {
      color: #cad2c5;
+     text-shadow: 0 2px 8px #2f3e46cc;
 }
 
  .cell.o {
      color: #84a98c;
+     text-shadow: 0 2px 8px #2f3e46cc;
 }
 
  .restart-btn {
      margin-top: 45px;
-     padding: 10px 20px;
-     font-size: 1em;
+     padding: 12px 32px;
+     font-size: 1.1em;
      border: none;
-     background-color: #cad2c5;
+     background: linear-gradient(135deg, #cad2c5 60%, #84a98c 100%);
      color: #2f3e46;
-     border-radius: 5px;
+     border-radius: 10px;
      cursor: pointer;
-     transition: background-color 0.3s;
+     font-weight: 700;
+     box-shadow: 0 2px 8px #2f3e4633;
+     letter-spacing: 1px;
+     transition: background 0.3s, transform 0.2s;
 }
 
  .restart-btn:hover {
-     background-color: #84a98c;
+     background: linear-gradient(135deg, #84a98c 60%, #cad2c5 100%);
+     transform: scale(1.06);
+     color: #354f52;
 }
