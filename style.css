@@ -5,18 +5,18 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: #2f3e46;
+    color: #cad2c5;
 }
 
-.game-container {
-    background-color: #34495e;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 90%;
-    max-width: 450px;
+ .game-container {
+     background-color: #354f52;
+     padding: 40px;
+     border-radius: 10px;
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+     text-align: center;
+     width: 90%;
+     max-width: 450px;
 }
 
 h1 {
@@ -28,24 +28,24 @@ h1 {
     margin-bottom: 20px;
 }
 
-.game-mode button {
-    padding: 10px 20px;
-    margin: 0 5px;
-    border: none;
-    background-color: #556a7f;
-    color: #ecf0f1;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+ .game-mode button {
+     padding: 10px 20px;
+     margin: 0 5px;
+     border: none;
+     background-color: #52796f;
+     color: #cad2c5;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s;
 }
 
-.game-mode button:hover {
-    background-color: #627b91;
+ .game-mode button:hover {
+     background-color: #84a98c;
 }
 
-.game-mode button.active {
-    background-color: #2ecc71;
-    font-weight: bold;
+ .game-mode button.active {
+     background-color: #84a98c;
+     font-weight: bold;
 }
 
 .status-message {
@@ -63,43 +63,43 @@ h1 {
     margin: 0 auto;
 }
 
-.cell {
-    width: 100px;
-    height: 100px;
-    background-color: #4b6176;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
+ .cell {
+     width: 100px;
+     height: 100px;
+     background-color: #52796f;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-size: 3em;
+     font-weight: bold;
+     cursor: pointer;
+     transition: background-color 0.3s;
 }
 
-.cell:hover {
-    background-color: #576e82;
+ .cell:hover {
+     background-color: #84a98c;
 }
 
-.cell.x {
-    color: #e74c3c;
+ .cell.x {
+     color: #cad2c5;
 }
 
-.cell.o {
-    color: #3498db;
+ .cell.o {
+     color: #84a98c;
 }
 
-.restart-btn {
-    margin-top: 45px;
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
-    background-color: #f1c40f;
-    color: #34495e;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+ .restart-btn {
+     margin-top: 45px;
+     padding: 10px 20px;
+     font-size: 1em;
+     border: none;
+     background-color: #cad2c5;
+     color: #2f3e46;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s;
 }
 
-.restart-btn:hover {
-    background-color: #f39c12;
+ .restart-btn:hover {
+     background-color: #84a98c;
 }

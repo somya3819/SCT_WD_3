@@ -1,10 +1,13 @@
+
 const cells = document.querySelectorAll('.cell');
 const statusMessage = document.getElementById('status');
 const restartBtn = document.getElementById('restart-btn');
 const pvpBtn = document.getElementById('pvp-btn');
 const pvcBtn = document.getElementById('pvc-btn');
+const difficultySelect = document.getElementById('difficulty-select');
 
 let gameMode = 'pvp'; // Default mode is Player vs Player
+let difficulty = 'easy';
 let currentPlayer = 'X';
 let gameState = ['', '', '', '', '', '', '', '', ''];
 let gameActive = true;
@@ -101,15 +104,97 @@ function handleRestartGame() {
 // Computer Player Logic
 function handleComputerMove() {
     const availableCells = gameState.map((cell, index) => cell === '' ? index : null).filter(val => val !== null);
-    
-    if (availableCells.length > 0) {
+    if (availableCells.length === 0) return;
+
+    let computerMoveIndex;
+    if (difficulty === 'easy') {
+        // Random move
         const randomIndex = Math.floor(Math.random() * availableCells.length);
-        const computerMoveIndex = availableCells[randomIndex];
-        const computerCell = cells[computerMoveIndex];
-        
-        handleCellPlayed(computerCell, computerMoveIndex);
-        handleResultValidation();
+        computerMoveIndex = availableCells[randomIndex];
+    } else if (difficulty === 'medium') {
+        // Block player if possible, else random
+        computerMoveIndex = getBlockingMove('X') ?? availableCells[Math.floor(Math.random() * availableCells.length)];
+    } else if (difficulty === 'hard') {
+        // Minimax for best move
+        computerMoveIndex = getBestMove('O');
     }
+    const computerCell = cells[computerMoveIndex];
+    handleCellPlayed(computerCell, computerMoveIndex);
+    handleResultValidation();
+}
+
+// Medium: block player win
+function getBlockingMove(player) {
+    for (let i = 0; i < winningConditions.length; i++) {
+        const [a, b, c] = winningConditions[i];
+        const line = [gameState[a], gameState[b], gameState[c]];
+        if (line.filter(x => x === player).length === 2 && line.includes('')) {
+            const emptyIndex = [a, b, c][line.indexOf('')];
+            return emptyIndex;
+        }
+    }
+    return null;
+}
+
+// Hard: Minimax
+function getBestMove(player) {
+    let bestScore = -Infinity;
+    let move;
+    for (let i = 0; i < 9; i++) {
+        if (gameState[i] === '') {
+            gameState[i] = player;
+            let score = minimax(gameState, 0, false);
+            gameState[i] = '';
+            if (score > bestScore) {
+                bestScore = score;
+                move = i;
+            }
+        }
+    }
+    return move;
+}
+
+function minimax(state, depth, isMaximizing) {
+    const winner = checkWinner(state);
+    if (winner !== null) {
+        if (winner === 'O') return 10 - depth;
+        else if (winner === 'X') return depth - 10;
+        else return 0;
+    }
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (state[i] === '') {
+                state[i] = 'O';
+                let score = minimax(state, depth + 1, false);
+                state[i] = '';
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (state[i] === '') {
+                state[i] = 'X';
+                let score = minimax(state, depth + 1, true);
+                state[i] = '';
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+}
+
+function checkWinner(state) {
+    for (let i = 0; i < winningConditions.length; i++) {
+        const [a, b, c] = winningConditions[i];
+        if (state[a] && state[a] === state[b] && state[a] === state[c]) {
+            return state[a];
+        }
+    }
+    if (!state.includes('')) return 'draw';
+    return null;
 }
 
 function setGameMode(mode) {
@@ -129,6 +214,25 @@ cells.forEach(cell => cell.addEventListener('click', handleCellClick));
 restartBtn.addEventListener('click', handleRestartGame);
 pvpBtn.addEventListener('click', () => setGameMode('pvp'));
 pvcBtn.addEventListener('click', () => setGameMode('pvc'));
+difficultySelect.addEventListener('change', (e) => {
+    difficulty = e.target.value;
+});
+
+// Show/hide difficulty selector based on mode
+function updateDifficultyVisibility() {
+    if (gameMode === 'pvc') {
+        difficultySelect.style.display = '';
+    } else {
+        difficultySelect.style.display = 'none';
+    }
+}
+// Update on mode change
+const origSetGameMode = setGameMode;
+setGameMode = function(mode) {
+    origSetGameMode(mode);
+    updateDifficultyVisibility();
+};
+updateDifficultyVisibility();
 
 // Initial message
 statusMessage.innerHTML = messages.xTurn;
